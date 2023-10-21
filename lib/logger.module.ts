@@ -1,6 +1,6 @@
 import { DynamicModule } from '@nestjs/common';
 import { createLoggerProviders } from './logger.providers';
-import { UzzeLoggerService } from './logger.service';
+import { LoggerService } from './logger.service';
 
 export class LoggerModule {
   static tokensForLoggers = new Array<string>();
@@ -12,8 +12,8 @@ export class LoggerModule {
 
     return {
       module: LoggerModule,
-      providers: [UzzeLoggerService, ...prefixedLoggerProviders],
-      exports: [UzzeLoggerService, ...prefixedLoggerProviders],
+      providers: [LoggerService, ...prefixedLoggerProviders],
+      exports: [LoggerService, ...prefixedLoggerProviders],
     };
   }
 }

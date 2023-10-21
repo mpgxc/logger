@@ -1,8 +1,8 @@
 import { Provider } from '@nestjs/common';
-import { UzzeLoggerService } from './logger.service';
+import { LoggerService } from './logger.service';
 import { getLoggerToken } from './logger.utils';
 
-const loggerFactory = (logger: UzzeLoggerService, token?: string) => {
+const loggerFactory = (logger: LoggerService, token?: string) => {
   if (token) {
     logger.setContext(token);
   }
@@ -10,13 +10,13 @@ const loggerFactory = (logger: UzzeLoggerService, token?: string) => {
   return logger;
 };
 
-const createLoggerProvider = (token?: string): Provider<UzzeLoggerService> => ({
-  inject: [UzzeLoggerService],
+const createLoggerProvider = (token?: string): Provider<LoggerService> => ({
+  inject: [LoggerService],
   provide: getLoggerToken(token),
   useFactory: (logger) => loggerFactory(logger, token),
 });
 
 export const createLoggerProviders = (
   tokens: string[],
-): Array<Provider<UzzeLoggerService>> =>
+): Array<Provider<LoggerService>> =>
   tokens.map((token) => createLoggerProvider(token));

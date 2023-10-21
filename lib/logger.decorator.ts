@@ -3,7 +3,7 @@ import { LoggerModule } from './logger.module';
 import { getLoggerToken } from './logger.utils';
 
 /**
- * Injects a `UzzeLoggerService`
+ * Injects a `LoggerService`
  *
  * @param token Token which gets prepended before every log message
  */
