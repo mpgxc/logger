@@ -23,7 +23,8 @@
     "build": "rimraf dist && tsc -p tsconfig.json",
     "prepublishOnly": "npm run build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint": "eslint \"{src,apps,libs,test,lib}/**/*.ts\" --fix"
+    "lint": "eslint \"{src,apps,libs,test,lib}/**/*.ts\" --fix",
+    "commit": "git-cz"
   },
   "peerDependencies": {
     "@nestjs/common": "^10.0.0"
