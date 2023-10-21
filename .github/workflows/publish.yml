@@ -1,0 +1,41 @@
+name: Publish package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-gpr:
+    name: 🚀 Publish package on Github Package Registry
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@mpgxc'
+      - run: npm i && npm ci
+      - run: npm publish --access=public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+  publish-npm:
+    name: 📦 Publish package on NPM
+    runs-on: ubuntu-latest
+    environment: Publish
+    needs: publish-gpr
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - run: npm i
+      - run: npm run build
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}

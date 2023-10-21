@@ -1,0 +1,48 @@
+{
+  "name": "@mpgxc/logger",
+  "version": "0.0.1",
+  "description": "Uma biblioteca Logger personalizada para o NestJS com injeção de dependência e configuração automática de contexto.",
+  "author": "mpgxc",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpgxc/logger.git"
+  },
+  "files": [
+    "dist",
+    "index.js",
+    "index.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test,lib}/**/*.ts\" --fix"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^10.0.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^10.1.18",
+    "@nestjs/schematics": "^10.0.2",
+    "@types/node": "^20.8.7",
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3",
+    "source-map-support": "^0.5.21",
+    "ts-loader": "^9.5.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.2.2",
+    "rimraf": "^5.0.5"
+  }
+}
