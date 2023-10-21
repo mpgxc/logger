@@ -1,4 +1,4 @@
-import { Inject } from '@nestjs/common';
+import { Inject, Logger } from '@nestjs/common';
 import { LoggerModule } from './logger.module';
 import { getLoggerToken } from './logger.utils';
 
@@ -8,9 +8,17 @@ import { getLoggerToken } from './logger.utils';
  * @param token Token which gets prepended before every log message
  */
 export const LoggerInject = (token: string = '') => {
-  if (!LoggerModule.tokensForLoggers.includes(token)) {
-    LoggerModule.tokensForLoggers.push(token);
+  const tokenAlreadyUsed =
+    `LoggerInject('${token}') is already used. ` +
+    `Please use another token or use LoggerInject('${token}_1') instead.`;
+
+  if (LoggerModule.tokensForLoggers.includes(token)) {
+    Logger.error(tokenAlreadyUsed, 'LoggerModule');
+
+    throw new Error(tokenAlreadyUsed);
   }
+
+  LoggerModule.tokensForLoggers.push(token);
 
   return Inject(getLoggerToken(token));
 };
