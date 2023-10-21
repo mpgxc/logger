@@ -1,19 +1,23 @@
-import { DynamicModule } from '@nestjs/common';
+import { DynamicModule, Provider } from '@nestjs/common';
 import { createLoggerProviders } from './logger.providers';
 import { LoggerService } from './logger.service';
 
-export class LoggerModule {
-  static tokensForLoggers = new Array<string>();
+type LoggerModuleOptions = {
+  isGlobal?: boolean;
+};
 
-  static forRoot(): DynamicModule {
-    const prefixedLoggerProviders = createLoggerProviders(
-      this.tokensForLoggers,
-    );
+export class LoggerModule {
+  public static tokensForLoggers = new Array<string>();
+
+  static forRoot(options: LoggerModuleOptions): DynamicModule {
+    const prefixedLoggerProviders: Provider<LoggerService>[] =
+      createLoggerProviders(this.tokensForLoggers);
 
     return {
       module: LoggerModule,
       providers: [LoggerService, ...prefixedLoggerProviders],
       exports: [LoggerService, ...prefixedLoggerProviders],
+      global: options.isGlobal,
     };
   }
 }
