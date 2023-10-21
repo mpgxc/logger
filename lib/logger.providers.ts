@@ -2,20 +2,27 @@ import { Provider } from '@nestjs/common';
 import { LoggerService } from './logger.service';
 import { getLoggerToken } from './logger.utils';
 
-const loggerFactory = (logger: LoggerService, token?: string) => {
-  if (token) {
-    logger.setContext(token);
-  }
+/**
+ * Creates a factory for a single token registered in the LoggerModule.
+ */
+const loggerFactory = (token: string) => (logger: LoggerService) => {
+  logger.setContext(token);
 
   return logger;
 };
 
-const createLoggerProvider = (token?: string): Provider<LoggerService> => ({
+/**
+ * Creates a provider for a single token registered in the LoggerModule.
+ */
+const createLoggerProvider = (token: string): Provider<LoggerService> => ({
   inject: [LoggerService],
   provide: getLoggerToken(token),
-  useFactory: (logger) => loggerFactory(logger, token),
+  useFactory: loggerFactory(token),
 });
 
+/**
+ * Creates providers for all tokens registered in the LoggerModule.
+ */
 export const createLoggerProviders = (
   tokens: string[],
 ): Array<Provider<LoggerService>> =>
