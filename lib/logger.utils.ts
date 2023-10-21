@@ -3,4 +3,4 @@
  * @param token The token of the logger
  */
 export const getLoggerToken = (token: string = ''): string =>
-  `LoggerService${token}`;
+  `LoggerService:${token}`;
