@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/mpgxc/logger/compare/v2.0.0...v2.0.1) (2023-10-25)
+
+
+### Bug Fixes
+
+* **logger.module:** making the properties of the "forRoot" method optional ([e798000](https://github.com/mpgxc/logger/commit/e7980004412f6aa78ec91b9d07ed4d8265697a5b))
+
 # [2.0.0](https://github.com/mpgxc/logger/compare/v1.0.0...v2.0.0) (2023-10-21)
 
 
