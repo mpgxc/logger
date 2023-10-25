@@ -9,7 +9,7 @@ type LoggerModuleOptions = {
 export class LoggerModule {
   public static tokensForLoggers = new Array<string>();
 
-  static forRoot(options: LoggerModuleOptions): DynamicModule {
+  static forRoot(options?: LoggerModuleOptions): DynamicModule {
     const prefixedLoggerProviders: Provider<LoggerService>[] =
       createLoggerProviders(this.tokensForLoggers);
 
